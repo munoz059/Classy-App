@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="cs441_project.testPage3"
+    BackgroundColor="BlanchedAlmond"
+    Title="Chatroom">
+    
+    <ContentPage.Icon>
+        <OnPlatform
+            x:TypeArguments="FileImageSource"
+            iOS="Chat_Icon.png" />
+    </ContentPage.Icon>
+    
+    <StackLayout
+        Margin="0,0,0,0">
+        <!--<Frame 
+            Margin="15,0,15,0"
+            Padding="5"
+            HasShadow="false"
+            CornerRadius="3"
+            IsClippedToBounds="true"
+            BackgroundColor="Transparent">-->
+            <ListView
+                BackgroundColor="Transparent"
+                x:Name="ChatroomListView"
+                SeparatorVisibility="None"
+                HasUnevenRows="true"
+                IsPullToRefreshEnabled="true"
+                Refreshing="Handle_Refreshing"
+                ItemTapped="OnTapped"
+                Margin="15,15,15,0">
+                <ListView.ItemTemplate>
+                <DataTemplate>
+                <ViewCell x:Name="ChatroomItemCell">
+                <ViewCell.ContextActions>
+                    <MenuItem
+                        Text="Leave"
+                        IsDestructive="true"
+                        Clicked="ChatroomItemCell_OnLeave"/>
+                </ViewCell.ContextActions>
+                <ViewCell.View>
+                    <StackLayout>
+                        <Frame
+                            BackgroundColor="White"
+                            HasShadow="false"
+                            Padding="5"
+                            HeightRequest="40"
+                            OutlineColor="#cccccc"
+                            CornerRadius="3"
+                            Margin="0,1,0,0">
+                            <StackLayout>
+                                <Label
+                                    Text="{Binding ListOfMemberNames}"
+                                    FontSize="12"
+                                    VerticalOptions="CenterAndExpand"
+                                    VerticalTextAlignment="Center"
+                                    Margin="15,5,0,0"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ViewCell.View>
+                </ViewCell>
+                </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        <!--</Frame>-->
+    </StackLayout>
+</ContentPage>

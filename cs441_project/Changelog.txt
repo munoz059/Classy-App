@@ -1,0 +1,168 @@
+﻿(Dec 10, 2017) PROJECT DONE
+Client
+-Added ForumPostItem.cs
+-Added ForumThreadItem.cs
+-Added InnerForumThreadPage.xaml and InnerForumThreadPage.xaml.cs
+    -Heavy work
+-Added ForumPostDetailsPage.xaml and ForumPostDetailsPage.xaml.cs
+    -Heavy work
+-Heavy work on testPage1.xaml and testPage1.xaml.cs
+-Code cleanup
+-Removed testLabel Labels on all pages
+-UI consistency checking
+Server
+-Bug fixes, didn't remove user from Members table when executing drop_user and leave_classroom
+-Added remaining functions
+
+
+
+
+(Dec 8, 2017)
+Client
+-Added more icons (Send)
+-Added ChatroomItem.cs
+-Added ChatroomMessageItem.cs
+-Added InnerChatroomPage.xaml and InnerChatroomPage.xaml.cs
+    -Heavy work
+-Added NewChatroomPage.xaml and NewChatroomPage.xaml.cs
+    -Heavy work
+Server
+-Added functions (several relating to forum threads and chat)
+-Added ChatroomMessages table to classrooms
+
+
+
+
+(Dec 4, 2017)
+Client
+-Removed Done switch on testPage2 (aka Todo list page)
+-Added isOwner property to ClassroomInfoItem
+-Added ClassroomDetailsPage.xaml and ClassroomDetailsPage.xaml.cs
+-Heavy work on UsersPage and ClassroomDetailsPage
+-Redesigned listview context actions to be dependant on the current user's ownership status
+Server
+-Added functions (create_forum_thread, edit_classroom)
+-Fix in leave_classroom
+
+
+
+
+(Nov 29, 2017)
+Client
+-Added more icons (Invite, OwnerStar)
+-Added InvitePage.xaml and InvitePage.xaml.cs
+    -Known issue: non-owners can use context actions, will fix later
+-Added UserItem.cs
+-Fixed problem with detecting if user was owner, case sensitive problem
+-Fixed TodoDetailsView not showing current state of HasDueDateSwitch and wrong Date and Time picker settings
+Server
+-Added functions (get_users, drop_user, invite_user)
+
+
+
+
+(Nov 28, 2017)
+Client
+-Added more icons (Chat, Forum, Account, Settings, Add, Users, Options, Trashcan, Enter)
+-Replaced many word buttons with icon buttons
+-Added UsersPage.xaml and UsersPage.xaml.cs
+Server
+-
+
+
+
+
+(Nov 26, 2017)
+Client
+-Added pull-to-refresh to testPage2 (aka todo list page)
+-Made HomePage and testPage2 (aka todo list page) pages populate list views when entering page
+-Added toolbar icons to testPage 2 (aka todo list page)
+-Added JoinClassroomPage.xaml and JoinClassroomPage.cs
+-Added titles to every page
+Server
+-Implemented a few more command (get todo items,)
+-Started to implement better error responses because they are not user friendly
+    -Join classroom
+
+
+
+
+(Nov 24, 2017)
+Client
+-Added Join classroom toolbar item
+-Made communication to the server a class, rather than copy/pasting the same code
+    -SendToServer class
+    -Just be sure to set the bindingPage member to the current page in order to see alerts
+-More work on HomePage
+Server
+-Added Id column to TodoItems table in classroom databases
+-Implemented a few more commands (join classroom, delete classroom, leave classroom, delete todo item)
+-Code cleanup and minor fixes
+
+
+
+
+(Nov 20, 2017)
+Client
+-Renamed HomePage to ClassroomPage
+-Added HomePage to join / enter / leave / create classrooms
+-Added JoinClassroomItem, LeaveClassroomItem, CreateClassroomItem, DeleteClassroomItem, GetMyClassroomsItem to ServerItems.cs
+-Heavy work on HomePage
+-Small changes to TodoDetailsPage
+-Added ClassroomInfoItem.cs
+
+Server
+-Added getUserClassrooms
+
+
+
+
+(Nov 14, 2017)
+Client
+-Added alert for when successful recovery email sent
+-Removed alert asking to create new task (todo)
+-todoDetailView updated
+-TodoItem updated to add new fields
+-Added AddTodoItem server command in ServerItems.cs
+-Added basic code to send/retreive todo items
+-Removed navigation page on HomePage.xaml and left it as a normal content page
+
+Server
+-Added revised database to create classroom databases
+-Added the add todo item command
+
+
+
+
+
+(Oct 15, 2017)
+Client
+-Moved ValidateUserItem, ForgotPasswordItem, and AddUserItem to a new file "ServerItems.cs"
+    -Added ResponseItem to this file, the standard object returned by server
+-All responses from server no longer a string, now deserialized into ResponseItem
+-Moved "HttpClient client" object and settings code to a global public instance in "App.xaml.cs"
+ so all pages can use it without reconnecting
+    -Access it with App.client
+-Changed Email_Entry Entry box "Keyboard" propery to "Email" in "cs441_projectPage.xaml"
+-Added ResourceDictionaries to XAML pages:
+    -cs441_projectPage.xaml
+    *other xaml files could use this, but this isn't that neccessary. its just to tidy up
+-Made HomePage accessible by successfully logging in
+-Homepage is now a TabbedPaged and added 3 tabs
+    -Tab 1 = testPage1 (added iOS icon)
+    -Tab 2 = testPage2
+    -Tab 3 = testPage3
+-Added icons to iOS resources folder
+    *Note: @1x, @2x, @3x are so the app can choose an appropriate size
+        -I chose 30x30, 60x60, and 90x90 respectively
+
+Server
+-Added getResponseJSON function to create a standard for responding to client, structure of
+ JSON is below
+        '{
+            "Success" : <true | false>
+            "Response" : "<response text, optional>"
+            "Data" : <extra data, optional> #if no data, then use "" or None, both will be treated as an empty string
+        }'
+    -Updated functions in "index.py" to return data in this way
+-Fixed double quotes in strings causing errors in JSON, replaces double quotes with proper escape character

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="cs441_project.testPage2"
+    Title="Todo List"
+    BackgroundColor="BlanchedAlmond">
+
+    <ContentPage.Icon>
+        <OnPlatform
+            x:TypeArguments="FileImageSource"
+            iOS="Todo_Icon.png" />
+    </ContentPage.Icon>
+
+    <StackLayout
+        Margin="0,0,0,0">
+        <ListView 
+            BackgroundColor="Transparent"
+            x:Name="TodoListView" 
+            SeparatorVisibility="None"
+            HasUnevenRows="true"
+            ItemTapped="OnSelect"
+            IsPullToRefreshEnabled="true"
+            Refreshing="Handle_Refreshing"
+            Margin="15,15,15,0">
+            <ListView.ItemTemplate>
+            <DataTemplate>
+            <ViewCell x:Name="TodoItemCell">
+            <ViewCell.View>
+                <StackLayout>
+                    <Frame
+                        BackgroundColor="White"
+                        HasShadow="false"
+                        Padding="5"
+                        OutlineColor="#cccccc"
+                        CornerRadius="3"
+                        Margin="0,0,0,0">
+                        <StackLayout>
+                            <StackLayout
+                                IsClippedToBounds="true"
+                                MinimumHeightRequest="0">
+                                <Label 
+                                    Text="{Binding DueDateTime, StringFormat='{}{0:\\D\\u\\e \\o\\n MMMM dd, yyyy a\\t h:mm tt}'}" 
+                                    FontSize="10"
+                                    TextColor="#888888"
+                                    IsVisible="{Binding HasDueDate}"
+                                    Margin="0,0,0,0"/>
+                                <Label
+                                    Text="{Binding Title}" 
+                                    FontAttributes="Bold"
+                                    Margin="0,0,0,0"/>
+                                <Label
+                                    Text="{Binding Description}" 
+                                    FontSize="12"
+                                    TextColor="Black"
+                                    Margin="0,-5,0,0"/>
+                            </StackLayout>
+                            <StackLayout 
+                                Orientation="Horizontal" 
+                                VerticalOptions="End">
+                                <!--<Label
+                                    VerticalOptions="Center"
+                                    TextColor="#888888"
+                                    Margin="0,0,0,-5"
+                                    Text="Done:"
+                                    FontSize="12"/>
+                                <Switch
+                                    Scale="0.70"
+                                    Margin="-10,0,0,-5"
+                                    VerticalOptions="End"
+                                    IsToggled="{Binding Done}"
+                                    Toggled="OnDoneToggled"
+                                    BindingContext="{Binding Source={x:Reference TodoItemCell}, Path=BindingContext}"/>-->
+                                <!--Text="{Binding CreatedDateTime, StringFormat='{}{0:\\P\\o\\s\\t\\e\\d \\o\\n MMMM dd, yyyy a\\t h:mm tt}'}" -->
+                                <Label 
+                                    Text="{Binding CreatedDateTime, StringFormat='Posted on \{0:MMMM dd, yyyy \\a\\t h:mm tt\}'}" 
+                                    FontSize="10"
+                                    IsVisible="{Binding notEdited}"
+                                    TextColor="#888888"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="End"
+                                    Margin="0,0,0,0"/>
+                                <Label 
+                                    Text="{Binding LastEditDateTime, StringFormat='Last edited on \{0:MMMM dd, yyyy \\a\\t h:mm tt\}'}" 
+                                    FontSize="10"
+                                    IsVisible="{Binding isEdited}"
+                                    TextColor="#888888"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="End"
+                                    Margin="0,0,0,0"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ViewCell.View>
+            </ViewCell>
+            </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
